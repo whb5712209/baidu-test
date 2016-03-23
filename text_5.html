@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>零基础JavaScript编码（二）</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+    <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+ var i = 1;
+ var list = document.querySelector("#aqi-list");
+var aqiData = [
+  ["重庆", 90],
+  ["呼市", 1200],
+  ["桂阳", 1190],
+  ["清港", 290],
+  ["桐城", 291],
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["慈溪", 100]
+];
+
+(function () {
+  
+  var arr = aqiData.filter(function(_val,_key,_arr){
+    if(_val[1]>60){
+      return _val
+    }
+  });
+  arr.sort(function(x,y){
+      return x[1]<y[1];
+  });
+  var li = document.createElement("li");
+  arr.forEach(function(_val,_key,_arr){
+      var _li =li.cloneNode();
+      _li.innerText = "第"+i+"名："+_val[0]+","+_val[1];
+      list.appendChild(_li);
+      i++;
+  });
+})();
+
+</script>
+</body>
+</html>
