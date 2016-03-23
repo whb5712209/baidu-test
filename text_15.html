@@ -38,6 +38,8 @@ function getData() {
   var data = [];
   var source = document.querySelector("#source");
   var list = source.children;
+  var obj = {};
+  Array.prototype.forEach.apply(obj,[]);
   list.forEach(function(_val,_key,_arr){
       list.push(_val.split(","));
   });
