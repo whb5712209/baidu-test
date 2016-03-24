@@ -28,7 +28,6 @@
   <button id="sort-btn">排序</button>
 
 <script type="text/javascript">
-'use strict'
 /**
  * getData方法
  * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
@@ -38,12 +37,18 @@ function getData() {
   var data = [];
   var source = document.querySelector("#source");
   var list = source.children;
-  var obj = {};
-  Array.prototype.forEach.apply(obj,[]);
-  list.forEach(function(_val,_key,_arr){
-      list.push(_val.split(","));
-  });
-  return list;
+  var i = 0;len=list.length;
+  for(;i<len;i++){
+      var content = list[i].firstChild.nodeValue;
+      var fraction =  list[i].children[0].firstChild.nodeValue;
+      var _list = [];
+      var city = content.slice(0,2);
+      _list.push(city);
+      _list.push(fraction);
+      data.push(_list);
+  }
+  console.log(data);
+  return data;
 
 }
 
@@ -53,7 +58,18 @@ function getData() {
  * 返回一个排序后的数组
  */
 function sortAqiData(data) {
-
+    var i=0,j=0,len = data.length;
+    for(;i<len;i++){
+      for(;j<len-1;j++){
+          if(parseFloat(data[j][1])>parseFloat(data[j+1][1])){
+              var _d = data[j];
+              data[j] = data[j+1];
+              data[j+1] = _d;
+          }
+      }
+      j=0;
+    }
+   return data;
 }
 
 /**
@@ -62,7 +78,16 @@ function sortAqiData(data) {
  * 格式见ul中的注释的部分
  */
 function render(data) {
-
+    var resort = document.getElementById("resort"),i=0,len = data.length;
+    resort.innerHTML = "";
+        for(;i<len;i++){
+        var li = document.createElement("li");
+        li.innerHTML = "第"+(i+1)+"名:"+data[i][0]+"空气质量：";
+        var b =document.createElement("b");
+        b.innerHTML = data[i][1];
+        li.appendChild(b);
+        resort.appendChild(li);
+    }
 }
 
 function btnHandle() {
@@ -73,13 +98,15 @@ function btnHandle() {
 
 
 function init() {
-
+  var _dom = document.getElementById("sort-btn");
+  _dom.onclick = function(){
+    btnHandle();
+  }
   // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
 
 }
 
 init();
-getData();
 </script>
 </body>
 </html>
