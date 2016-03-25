@@ -86,6 +86,8 @@ function init() {
   });
   dom_name.addEventListener("blur",function(e){
   		var val_name = e.target.value;
+  		val_name = val_name.replace(/\s|\n|\f|\t|\v|\r/g, "");
+  		e.target.value = val_name;
   		var dom = e.target;
   		if(/^([\u4e00-\u9fa5]|[A-z])+$/.test(val_name)){
 			flag_name = true;
@@ -97,6 +99,8 @@ function init() {
   });
   dom_value.addEventListener("blur",function(e){
 		var val_value = e.target.value;
+  		val_value = val_value.replace(/\s|\n|\f|\t|\v|\r/g, "");
+  		e.target.value = val_value;
 		var dom = e.target;
   		if(/^[1-9][0-9]*$/.test(val_value)){
 			flag_value = true;
