@@ -1,0 +1,14 @@
+.warp{
+    width: 800px;
+    margin: 120px auto;
+}
+.warp .wp-m1{
+	margin: 3px 0px;
+}
+.warp .wp-fg{
+    overflow: hidden;
+	line-height: 2;
+}
+.warp .wp-bd{
+	border: 1px solid red;
+}
