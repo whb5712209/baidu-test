@@ -1,0 +1,58 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>零基础JavaScript编码（四）</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/test_16.css" />
+    
+  </head>
+<body>
+<div class="panel panel-default warp">
+  <div class="panel-body">
+    <div class="row verify">
+        <div class="col-md-12 ">
+            <div class="form-group wp-fg">
+                <label for="" class="col-sm-4 control-label">城市名称：</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" id="aqi-city-input" 
+                    valid="name">
+                </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+              <div class="form-group wp-fg">
+                  <label for="" class="col-sm-4 control-label">空气质量指数：</label>
+                  <div class="col-sm-8">
+                      <input class="form-control" type="text" id="aqi-value-input" 
+                      valid="value">
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group wp-fg">
+                <button class="btn btn-primary" id="add-btn">确认添加</button>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                        <th>城市名称</th>
+                        <th>空气质量</th>
+                        <th>操作</th>
+                      </tr>
+                  </thead>
+                  <tbody id="aqi-table">
+
+                  </tbody>
+              </table>
+            </div>
+        </div>    
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" data-main="js/test_16_1_main" src="lib/js/requirejs/require.js"></script>
