@@ -1,42 +1,71 @@
 define(function () {
+
 	function Statis(){
 		var self = this;
-		self.arr = [];
-		self.add = function(_type,_obj){
-			var i =0,len = self.arr.length,flag = false,show;
-			if(i === len){
-				var obj = {};
-				obj[_type] = _obj[_type];
-				obj.value = _obj.value;
-				if(_type =="week"){
-					obj.show = "第"+obj[_type]+"周";
+		self.list=[],myType="";
+		self.handle = function(type,obj){
+			myType = type;
+			runReckon(type,obj,self.list);
+		}
+		self.avg = function(){
+			var i = 0,len = self.list.length;
+			for(;i<len;i++){
+				self.list[i].totalValue = parseInt(self.list[i].value/self.list[i].totalNum);
+				if(myType =="day"){
+					self.list[i].title = self.list[i].show +"空气质量为 "+self.list[i].totalValue;
+				}else if(myType =="week"){
+					self.list[i].title = "第"+self.list[i].week+"周,空气质量为 "+self.list[i].totalValue;
 				}else{
-					obj.show = obj[_type]+"月";
+					self.list[i].title = self.list[i].month+"月份,空气质量为 "+self.list[i].totalValue;
 				}
-				self.arr.push(obj);
-				flag = true;
-			}else{
-				for(;i<len;i++){
-					if(self.arr[i][_type] == _obj[_type]){
-						var num = self.arr[i].value;
-						self.arr[i].value = num +_obj.value;
-						flag = true;
-					}
-				}
-			}
-			if(!flag){
-				var obj = {};
-				obj[_type] = _obj[_type];
-				obj.value = _obj.value;
-				if(_type =="week"){
-					obj.show = "第"+obj[_type]+"周";
-				}else{
-					obj.show = obj[_type]+"月";
-				}
-				self.arr.push(obj);
 			}
 		}
+
 	}	
+	var reckon = {
+		"day":function(obj,list){
+			obj.totalNum = obj.day;
+			list.push(obj);
+		},
+		"week":function(obj,list){
+			var i = 0,len = list.length,flag = true,myObj = {};
+			for(;i<len;i++){
+				if(obj.week == list[i].week){
+					myObj = list[i];
+					myObj.totalNum += 1;
+				 	myObj.value += obj.value;
+				 	flag = false;
+				}
+			}
+			if(len ==0||flag){
+				myObj.totalNum = 1;
+				myObj.value = obj.value;
+				myObj.week = obj.week;
+				list.push(myObj);
+			}
+		},
+		"month":function(obj,list){
+			var i = 0,len = list.length,flag = true,myObj = {};
+			for(;i<len;i++){
+				if(obj.month == list[i].month){
+					myObj = list[i];
+					myObj.totalNum += 1;
+				 	myObj.value += obj.value;
+				 	flag = false;
+				}
+			}
+			if(len ==0||flag){
+				myObj.totalNum = 1;
+				myObj.value = obj.value;
+				myObj.month = obj.month;
+				list.push(myObj);
+			}
+		}
+
+	}
+	function runReckon(type,obj,list){
+		return reckon[type](obj,list);
+	}
 	return {
 		/*
 		 *获取 data 所在年份的周数

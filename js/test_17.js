@@ -60,40 +60,25 @@ var pageState = {
 function renderChart() {
     warpDom.innerHTML = "";
     var divWarp = document.createElement("div");
+    divWarp.className = "divWarp";
     var divChar = document.createElement("div");
-    divWarp.style.display = "inline-block";
-    // divWarp.style.width = "12em";
-    divWarp.style.textAlign ="center";
-    // divChar.style.width = "1.5em";
-    divChar.style.border = "1px solid #ddd";
-    var span      = document.createElement("span");
-
+    divChar.className = "divChar";
     var i = 0,len = chartData.length;
     for(;i<len;i++){
        var _divWarp = divWarp.cloneNode();
        var _divChar = divChar.cloneNode();
-       var span = span.cloneNode();
        if(pageState.nowGraTime =='day'){
-         span.innerHTML = chartData[i].old;
-         _divChar.style.width = "1em";
+          _divChar.className = "divChar divChar-w-1";
        }else if(pageState.nowGraTime =='week'){
-        _divChar.style.width = "5em";
-         span.innerHTML = chartData[i].show;
+          _divChar.className = "divChar divChar-w-2";
        }else{
-        _divChar.style.width = "15em";
-        span.innerHTML = chartData[i].show;
+          _divChar.className = "divChar divChar-w-3";
        }
-        _divWarp.setAttribute("title",span.innerHTML+"空气质量为:"+chartData[i].value);
-
-       _divChar.style.height = (chartData[i].value/10)+"px";
-       _divChar.style.margin = "0 auto";
+        _divWarp.setAttribute("title",chartData[i].title);
+       _divChar.style.height = chartData[i].totalValue+"px";
        _divChar.style.background = "rgba("+ parseInt(Math.random()*255)+", "+ parseInt(Math.random()*255)+", "+ parseInt(Math.random()*255)+",0.8)";
        _divWarp.appendChild(_divChar);
-       _divWarp.appendChild(span);
-        _divWarp.style.margin = "5px 10px";
-     
        warpDom.appendChild(_divWarp);
-
     }
 }
 
@@ -109,36 +94,24 @@ function conditionChange(){
       var j = util.getWeek(date,arr);
       var _obj = {
           day:date.getTime(),
-          old:i,
+          show:i,
+          day:1,
           week:j+1,
           month:date.getMonth()+1,
           value:obj[i]
       }
       dateList.push(_obj);
     }
-    switch(type){
-      case "month":
-        dateList =conformity(dateList,type);
-        break;
-      case  "week":
-        var newArr = [];
-        dateList = conformity(dateList,type);
-        break;
-      default :
-        dateList.sort(function(a,b){
-            return a.millisecond -b.millisecond;
-        });
-    }  
-    // console.log(dateList);
-    chartData =  dateList;
+    chartData = conformity(dateList,type);
 }
 function conformity(list,type){
     var i=0,len = list.length,arr =[];
      var statis = util.createStatis(); 
     for(;i<len;i++){
-        statis.add(type,list[i]);
+        statis.handle(type,list[i]);
     }
-    return statis.arr;
+    statis.avg();
+    return statis.list;
 };
 /**
  * 初始化日、周、月的radio事件，当点击时，调用函数graTimeChange
