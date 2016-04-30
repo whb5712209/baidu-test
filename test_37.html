@@ -1,0 +1,135 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>任务三十七：UI组件之浮出层</title>
+    <!-- <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" /> -->
+    <style>
+        body{
+          height: 1800px;
+          font-size: 14px;
+        }
+        h1,h2,h3,h4,h5,h6,div{
+          margin: 0px;
+          padding: 0px
+        }
+        .vague{
+             filter: blur(2px); 
+          -webkit-filter: blur(2px);
+        }
+        .layer{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          background: #fff;
+          opacity: 0.5;
+        }
+        .eject{
+          border: 1px solid #ddd;
+          outline: none;
+          position: fixed;
+          box-shadow: 7px 7px 7px #D67C7C;
+          border-radius: 12px;
+          background: #fff;
+          z-index: 999;
+        }
+        .eject header{
+          position: relative;
+        }
+        .eject .title{
+            color: #333;
+            text-align: left;
+            text-shadow: 2px 2px 4px #D67C7C;
+            padding: 1em 0em 0.5em 1em;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .eject .eje-body{
+          margin: 1em;
+        }
+        .big{
+          width: 80%;
+          height:600px;
+        }
+        .eject footer{
+            border-top: 1px solid #e5e5e5;
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 100%;
+        }
+        .eject footer div{
+          text-align: right;
+          margin: 10px 10px 10px 0px;
+          font-size: 0px;
+        }
+         .eject footer div .btn{
+          display: inline-block;
+          padding: 10px 20px 10px; 
+          outline: none;
+          cursor: pointer;
+          text-align: center;
+          margin: 0px 0.5em; 
+         }
+        .eject footer div .btn-default{
+          font-size: 16px;
+          background: #fff;
+          border:1px solid #ccc;
+          border-radius: 6px;
+        }
+        .eject footer div .btn-default:hover{
+            background: #E6E6E6
+        }
+        .eject .close{
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            padding: 1em 1em 0.5em 0em;
+            font-weight: 700;
+            color: #000;  
+            cursor: pointer;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .2;
+          }
+          .eject .close:hover{
+            opacity:1;
+          }
+    </style>
+  </head>
+<body>
+  <button  id="openModel" >打开弹框</button>
+  <div   style="padding: 8px; background-color: #aaa; position: relative;" class="need-vague">
+          <div id="divDisplay" style="background-color: #0f0; margin: 30px; padding: 10px;
+              height: 1200px; width: 1200px; border: solid 3px #f00;">
+          </div>
+      </div>
+</body>
+
+<!-- 
+<script type="text/javascript">
+        var div = document.getElementById('divDisplay');
+
+        var clientHeight = div.clientHeight;
+        var clientWidth = div.clientWidth;
+        div.innerHTML += 'clientHeight: ' + clientHeight + '<br/>';
+        div.innerHTML += 'clientWidth: ' + clientWidth + '<br/>';
+
+        var clientLeft = div.clientLeft;
+        var clientTop = div.clientTop;
+        div.innerHTML += 'clientLeft: ' + clientLeft + '<br/>';
+        div.innerHTML += 'clientTop: ' + clientTop + '<br/>';
+
+        var offsetHeight = div.offsetHeight;
+        var offsetWidth = div.offsetWidth;
+        div.innerHTML += 'offsetHeight: ' + offsetHeight + '<br/>';
+        div.innerHTML += 'offsetWidth: ' + offsetWidth + '<br/>';
+
+        var offsetLeft = div.offsetLeft;
+        var offsetTop = div.offsetTop;
+        div.innerHTML += 'offsetLeft: ' + offsetLeft + '<br/>';
+        div.innerHTML += 'offsetTop: ' + offsetTop + '<br/>';
+
+        var offsetParent = div.offsetParent;
+        div.innerHTML += 'offsetParent: ' + offsetParent.id + '<br/>';
+    </script> -->
+ <script src="js/test_37.js"></script>
+</html>
