@@ -1,14 +1,16 @@
 window.onload = function (argument) {
    
    document.getElementById("openModel").addEventListener("click",function (argument) {
-     model.open("大胖").showTip("二胖").addFooter({
+     model.open("大胖").showTip("二胖").addFooter(
+     {
           "确认吗":function(event){
                 console.log(123);
             },
             "关闭吗":function(event){
                 model.close(456);
             }
-     });
+     }
+     );
    });
    
    (function createModel(window){
